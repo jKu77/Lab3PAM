@@ -1,0 +1,32 @@
+name: barber_app
+description: "A new Flutter project."
+publish_to: 'none' 
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.5.3
+
+dependencies:
+  flutter:
+    sdk: flutter
+    flutter_bloc: ^8.0.1
+  bloc: ^8.0.3
+
+
+  cupertino_icons: ^1.0.8
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+     get: ^4.6.5
+
+  flutter_lints: ^4.0.0
+
+flutter:
+
+  uses-material-design: true
+  assets:
+    - assets/pics/
+    - assets/timer_photos/
+    - assets/barbershop.json

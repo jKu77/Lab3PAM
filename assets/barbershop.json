@@ -1,0 +1,33 @@
+[
+    {
+      "name": "Barbershop 1",
+      "distance": "2 km",
+      "rating": 4.8,
+      "image": "assets/pics/1.jpg"
+    },
+    {
+      "name": "Barbershop 2",
+      "distance": "5 km",
+      "rating": 4.5,
+      "image": "assets/pics/2.jpg"
+    },
+    {
+      "name": "Barbershop 3",
+      "distance": "1 km",
+      "rating": 4.7,
+      "image": "assets/pics/3.jpg"
+    },
+    {
+        "name": "Barbershop 4",
+        "distance": "3 km",
+        "rating": 4.8,
+        "image": "assets/pics/9.jpg"
+    },
+    {
+        "name": "Barbershop 5",
+        "distance": "13 km",
+        "rating": 3.8,
+        "image": "assets/pics/8.jpg"
+      }
+  ]
+  
