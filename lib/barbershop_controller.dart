@@ -1,60 +1,31 @@
 import 'dart:convert';
-import 'package:flutter/services.dart' show rootBundle;
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-
-class Barbershop {
-  final String name;
-  final String distance;
-  final double rating;
-  final String image;
-
-  Barbershop({
-    required this.name,
-    required this.distance,
-    required this.rating,
-    required this.image,
-  });
-
-  factory Barbershop.fromJson(Map<String, dynamic> json) {
-    return Barbershop(
-      name: json['name'] as String,
-      distance: json['distance'] as String,
-      rating: (json['rating'] as num).toDouble(),
-      image: json['image'] as String,
-    );
-  }
-}
+import 'barbershop_model.dart';
 
 class BarbershopController extends GetxController {
+  // O listă observabilă de barbershops
   var barbershops = <Barbershop>[].obs;
+
+  // Index observabil pentru imaginea curentă din UI
   var currentImageIndex = 0.obs;
 
+  // Metoda `onInit` se execută la inițializarea controller-ului
   @override
   void onInit() {
     super.onInit();
+    // Încarcă barbershops la inițializare
     loadBarbershops();
-    startImageSlider();
   }
 
+  // Funcție pentru încărcarea datelor din fișierul JSON
   Future<void> loadBarbershops() async {
-    try {
-      final String response =
-          await rootBundle.loadString('assets/barbershop.json');
-      final List<dynamic> data = json.decode(response);
-      barbershops.value =
-          data.map((json) => Barbershop.fromJson(json)).toList();
-    } catch (e) {
-      print("Eroare la încărcarea JSON: $e");
-    }
-  }
-
-  void startImageSlider() {
-    ever(barbershops, (_) {
-      currentImageIndex.value = 0;
-    });
-    Future.delayed(const Duration(seconds: 5), () {
-      currentImageIndex.value =
-          (currentImageIndex.value + 1) % barbershops.length;
-    });
+    // Încarcă fișierul JSON din assets
+    final String response = await rootBundle.loadString('assets/barbershop.json');
+    // Decodifică JSON-ul într-o listă de mapări
+    final List<dynamic> data = json.decode(response);
+    
+    // Convertește fiecare mapă JSON într-un obiect `Barbershop` și adaugă-l la lista observabilă
+    barbershops.value = data.map((json) => Barbershop.fromJson(json)).toList();
   }
 }
