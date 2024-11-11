@@ -7,7 +7,6 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Inițializarea controllerului folosind Get.find() în metoda build
     final BarbershopController barbershopController = Get.find();
 
     return Scaffold(
@@ -105,6 +104,9 @@ class HomePage extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               Obx(() => _buildBarbershopList(barbershopController)),
+              const SizedBox(height: 24),
+              // Wrap _buildUserReviewsSection in Obx to observe changes
+              Obx(() => _buildUserReviewsSection(barbershopController)),
             ],
           ),
         ),
@@ -147,6 +149,56 @@ class HomePage extends StatelessWidget {
           ),
         );
       }).toList(),
+    );
+  }
+
+  Widget _buildUserReviewsSection(BarbershopController barbershopController) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          'Recenzii recente',
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        ),
+        const SizedBox(height: 16),
+        Column(
+          children: barbershopController.reviews.map((review) {
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 16.0),
+              child: Card(
+                elevation: 2,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: ListTile(
+                  leading: CircleAvatar(
+                    backgroundImage: AssetImage(review.userImage),
+                  ),
+                  title: Text(
+                    review.userName,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  subtitle: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          const Icon(Icons.star,
+                              size: 16, color: Colors.yellow),
+                          const SizedBox(width: 4),
+                          Text(review.rating.toString()),
+                        ],
+                      ),
+                      const SizedBox(height: 4),
+                      Text(review.comment),
+                    ],
+                  ),
+                ),
+              ),
+            );
+          }).toList(),
+        ),
+      ],
     );
   }
 }

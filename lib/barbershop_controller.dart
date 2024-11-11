@@ -2,30 +2,41 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'barbershop_model.dart';
+import 'review_model.dart';
 
 class BarbershopController extends GetxController {
-  // O listă observabilă de barbershops
+  // Observable list of all barbershops
   var barbershops = <Barbershop>[].obs;
 
-  // Index observabil pentru imaginea curentă din UI
+  // Observable list of popular barbers (filtered)
+  var popularBarbers = <Barbershop>[].obs;
+
+  // Observable list of reviews
+  var reviews = <Review>[].obs;
+
+  // Observable index for the current image
   var currentImageIndex = 0.obs;
 
-  // Metoda `onInit` se execută la inițializarea controller-ului
   @override
   void onInit() {
     super.onInit();
-    // Încarcă barbershops la inițializare
+    // Load barbershops and reviews at initialization
     loadBarbershops();
+    loadReviews();
   }
 
-  // Funcție pentru încărcarea datelor din fișierul JSON
+  // Function to load barbershops from JSON file
   Future<void> loadBarbershops() async {
-    // Încarcă fișierul JSON din assets
     final String response = await rootBundle.loadString('assets/barbershop.json');
-    // Decodifică JSON-ul într-o listă de mapări
     final List<dynamic> data = json.decode(response);
-    
-    // Convertește fiecare mapă JSON într-un obiect `Barbershop` și adaugă-l la lista observabilă
     barbershops.value = data.map((json) => Barbershop.fromJson(json)).toList();
+    popularBarbers.value = barbershops.where((barber) => barber.rating >= 4.5).toList();
+  }
+
+  // Function to load reviews from JSON file
+  Future<void> loadReviews() async {
+    final String response = await rootBundle.loadString('assets/reviews.json');
+    final List<dynamic> data = json.decode(response);
+    reviews.value = data.map((json) => Review.fromJson(json)).toList();
   }
 }

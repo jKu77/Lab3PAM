@@ -4,7 +4,7 @@ import 'home_page.dart';
 import 'barbershop_controller.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -12,11 +12,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Inițializăm controllerul aici pentru a fi disponibil global în aplicație
+    // Initialize BarbershopController globally in the application
     Get.put(BarbershopController());
 
-    return MaterialApp(
-      home: HomePage(),
+    return GetMaterialApp(  // Use GetMaterialApp instead of MaterialApp
+      home: const HomePage(),
       debugShowCheckedModeBanner: false,
     );
   }

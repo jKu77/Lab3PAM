@@ -1,0 +1,21 @@
+[
+    {
+      "userName": "Edik Varzarik",
+      "userImage": "assets/review_photos/edik.jpg",
+      "rating": 4.6,
+      "comment": "Frumos nu mai vin."
+    },
+    {
+      "userName": "Eugeniu Ispasius",
+      "userImage": "assets/review_photos/janel.jpg",
+      "rating": 4.9,
+      "comment": "Aproape perfect!"
+    },
+    {
+      "userName": "Alioskin Matrioskin",
+      "userImage": "assets/review_photos/alioskin.jpg",
+      "rating": 3.3,
+      "comment": "Ma tunde Edik mai ieftin si mai frumos!"
+    }
+  ]
+  

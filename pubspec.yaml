@@ -26,3 +26,5 @@ flutter:
     - assets/pics/
     - assets/timer_photos/
     - assets/barbershop.json
+    - assets/reviews.json
+    - assets/review_photos/
